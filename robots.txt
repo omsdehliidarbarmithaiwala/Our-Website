@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://omsdelhidarbarmithaiwala1947.github.io/Our-Website/sitemap.xml
+Sitemap: https://omsdehliidarbarmithaiwala.github.io/Our-Website/sitemap.xml
