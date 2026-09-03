@@ -235,7 +235,7 @@
     var hampLow = inr(Math.min.apply(null, HAMPERS.map(function (h) { return h.price; })));
     var hampHi  = inr(Math.max.apply(null, HAMPERS.map(function (h) { return h.price; })));
     var tiles = [
-      { label:'Modak & Prasad',   note:'from ₹450 / box', href:'ganpati.html', photo:'modak-box-21' },
+      { label:'Modak & Prasad',   note:'from ₹500 / box', href:'ganpati.html', photo:'modak-box-21' },
       { label:'Assortment Boxes', note:'from ' + bandLow + '/kg', href:'assortments.html', photo:'box-green' },
       { label:'Dry Fruit Sweets', note:low('dryfruit'),  href:'sweets.html', photo:shot('dryfruit') },
       { label:'Milk & Mawa',      note:low('milk-mawa'), href:'sweets.html', photo:shot('milk-mawa') },
