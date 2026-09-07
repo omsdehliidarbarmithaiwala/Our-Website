@@ -1,1 +1,6 @@
 mithai pictures/
+zomato_menu_images/
+zomato_profile_collages/
+*.tmp
+temp_*.html
+render_*.py
