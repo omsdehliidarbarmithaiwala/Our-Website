@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POS Billing Terminal &amp; Bill Dispatch — Om's Dehlii Darbar Mithaiwala (Since 1947)</title>
+<meta name="description" content="Official Counter POS Billing System for Om's Dehlii Darbar Mithaiwala. Gram-accurate sweet pricing, digital invoice generator, and 1-click WhatsApp & SMS bill dispatch.">
+<link rel="canonical" href="https://omsdehliidarbarmithaiwala.github.io/Our-Website/billing.html">
+<meta name="theme-color" content="#C4123F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Om's Dehlii Darbar Mithaiwala">
+<meta property="og:title" content="POS Billing Terminal — Om's Dehlii Darbar Mithaiwala">
+<meta property="og:description" content="Calculate exact prices by sweet grams and send digital bills instantly to customer's WhatsApp & phone number.">
+<link rel="preload" href="assets/fonts/bitter-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/bitter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/oswald-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v=2026-09-09">
+<script src="assets/js/products.js?v=2026-09-09" defer></script>
+<link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="announce"><span>Official Counter POS Terminal &nbsp;·&nbsp; <b>Gram-Accurate Weighing &amp; Pricing</b> &nbsp;·&nbsp; Direct WhatsApp &amp; SMS Bill Dispatch</span></div>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo.svg" width="150" height="110" alt="Om's Dehlii Darbar Mithaiwala — Mithai n More">
+      <span class="since">SINCE <b>1947</b></span>
+    </a>
+    <button class="navbtn" id="navbtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="billing.html" aria-current="page"><b>Billing Terminal</b></a></li>
+        <li><a href="menu.html">Menu &amp; Rates</a></li>
+        <li><a href="sweets.html">Our Sweets</a></li>
+        <li><a href="assortments.html">Assortment Boxes</a></li>
+        <li><a href="boxes.html">Boxes &amp; Hampers</a></li>
+        <li><a href="corporate.html">Corporate &amp; Mandals</a></li>
+        <li><a href="story.html">Our Story</a></li>
+        <li><a href="visit.html">Visit Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="pos-wrapper">
+  <div class="wrap">
+    
+    <!-- POS LAYOUT -->
+    <div class="pos-grid-layout">
+      
+      <!-- LEFT: COUNTER CATALOGUE -->
+      <div class="pos-catalog-panel">
+        <div class="pos-catalog-header">
+          <div class="pos-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="pos-search-input" placeholder="Search mithais by English or Hindi name..." autocomplete="off">
+          </div>
+          <button class="btn btn-ghost" id="pos-btn-custom-item" type="button" style="min-height:42px;padding:6px 14px;font-size:13px">+ Custom Item</button>
+        </div>
+
+        <!-- CATEGORY PILLS -->
+        <div class="pos-cat-filter" id="pos-cats" role="tablist">
+          <button class="pos-cat-btn active" data-cat="all">Everything (सब)</button>
+          <button class="pos-cat-btn" data-cat="modak">🕉️ Modak &amp; Prasad</button>
+          <button class="pos-cat-btn" data-cat="dryfruit">🌰 Dry Fruit Sweets</button>
+          <button class="pos-cat-btn" data-cat="milk-mawa">🥛 Milk &amp; Mawa</button>
+          <button class="pos-cat-btn" data-cat="peda">🪔 Traditional Pedas</button>
+          <button class="pos-cat-btn" data-cat="bengali">🍯 Bengali &amp; Syrupy</button>
+          <button class="pos-cat-btn" data-cat="farsan">🌶️ Farsan &amp; Snacks</button>
+          <button class="pos-cat-btn" data-cat="bands">🎁 4 Assortment Bands</button>
+          <button class="pos-cat-btn" data-cat="boxes">📦 Gift Boxes &amp; Hampers</button>
+        </div>
+
+        <!-- PRODUCTS TOUCH GRID -->
+        <div class="pos-items-grid" id="pos-items-container">
+          <!-- Dynamic Items Injected via JS -->
+        </div>
+      </div>
+
+      <!-- RIGHT: POS LIVE INVOICE & BILL DISPATCH PANEL -->
+      <div class="pos-bill-panel">
+        <div class="pos-bill-header">
+          <div>
+            <h3>Customer Bill</h3>
+            <span class="pos-bill-inv-no" id="pos-invoice-num">INV #ODD-2026-0001</span>
+          </div>
+          <div style="font-size:12px;opacity:.9;text-align:right" id="pos-live-clock">--:--:--</div>
+        </div>
+
+        <!-- CUSTOMER DETAILS INPUT -->
+        <div class="pos-customer-box">
+          <div class="pos-cust-field">
+            <label for="cust-name">Customer Name</label>
+            <input type="text" id="cust-name" placeholder="e.g. Rajesh Sharma">
+          </div>
+          <div class="pos-cust-field">
+            <label for="cust-phone">Receiver's Mobile No. *</label>
+            <input type="tel" id="cust-phone" placeholder="10 digits (e.g. 9820260299)" maxlength="10">
+          </div>
+        </div>
+
+        <!-- ITEM CART TABLE -->
+        <div class="pos-cart-table-wrap">
+          <table class="pos-cart-table">
+            <thead>
+              <tr>
+                <th style="width:48%">Item</th>
+                <th style="width:26%;text-align:center">Qty / Weight</th>
+                <th style="width:20%;text-align:right">Price (₹)</th>
+                <th style="width:6%"></th>
+              </tr>
+            </thead>
+            <tbody id="pos-cart-tbody">
+              <!-- Cart rows injected here -->
+            </tbody>
+          </table>
+          <div class="pos-cart-empty" id="pos-cart-empty-msg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:36px;height:36px;margin:0 auto 8px;display:block;opacity:.6"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            No sweets in bill yet.<br>Click any item from the left counter to weigh.
+          </div>
+        </div>
+
+        <!-- SUMMARY CALCULATION -->
+        <div class="pos-bill-summary">
+          <div class="pos-sum-row">
+            <span>Total Items &amp; Net Weight:</span>
+            <b id="pos-sum-items-count">0 items (0 g)</b>
+          </div>
+          <div class="pos-sum-row">
+            <span>Subtotal:</span>
+            <b id="pos-sum-subtotal">₹0.00</b>
+          </div>
+          <div class="pos-sum-row" style="font-size:12.5px;color:var(--muted)">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+              <input type="checkbox" id="pos-toggle-fancy-box"> Add Fancy Gift Box (+₹50)
+            </label>
+            <span id="pos-sum-box-charge">₹0.00</span>
+          </div>
+          <div class="pos-sum-row" style="font-size:12.5px;color:var(--muted)">
+            <label style="display:flex;align-items:center;gap:6px">
+              Discount (%):
+              <input type="number" id="pos-discount-pct" min="0" max="50" value="0" style="width:48px;padding:2px 4px;font-size:12px">
+            </label>
+            <span id="pos-sum-discount">-₹0.00</span>
+          </div>
+          <div class="pos-sum-row grand">
+            <span>Grand Total:</span>
+            <span class="amt" id="pos-sum-grand-total">₹0.00</span>
+          </div>
+        </div>
+
+        <!-- ACTIONS & DIRECT PHONE DISPATCH -->
+        <div class="pos-bill-actions">
+          <button class="btn-dispatch-wa" id="btn-send-whatsapp" type="button">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.17 8.17 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+            Send Bill to WhatsApp Number
+          </button>
+          
+          <div class="pos-sub-actions">
+            <button class="btn-dispatch-sms" id="btn-send-sms" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              Send SMS
+            </button>
+            <button class="btn-print-bill" id="btn-print-receipt" type="button" onclick="window.print()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              Print Slip
+            </button>
+          </div>
+          
+          <button class="btn-reset-bill" id="btn-clear-cart" type="button">Clear &amp; Start New Bill</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- WEIGHING / QUANTITY MODAL OVERLAY -->
+<div class="pos-modal-overlay" id="weigh-modal-overlay">
+  <div class="pos-modal" role="dialog" aria-modal="true" aria-labelledby="modal-sweet-name">
+    <div class="pos-modal-header">
+      <h3 id="modal-sweet-name">Weigh &amp; Add Sweet</h3>
+      <button class="pos-modal-close" id="modal-close-btn" type="button">&times;</button>
+    </div>
+    <div class="pos-modal-body">
+      
+      <!-- ITEM INFO BANNER -->
+      <div class="pos-modal-item-summary">
+        <img class="pos-modal-thumb" id="modal-item-img" src="assets/img/kaju-katri-400.jpg" alt="Mithai">
+        <div>
+          <h4 id="modal-item-title" style="font-size:18px;color:var(--maroon);margin:0">Kaju Katri</h4>
+          <div id="modal-item-deva" style="font-family:'Mukta',sans-serif;color:var(--crimson);font-size:14px;font-weight:600">काजू कतरी</div>
+          <div id="modal-item-rate-label" style="font-size:13px;color:var(--muted);font-weight:700">Official Rate: ₹1,200 / kg</div>
+        </div>
+      </div>
+
+      <!-- LIVE GRAM PRICE CALCULATOR BOX -->
+      <div class="pos-modal-calc-box">
+        <div class="pos-calc-formula" id="modal-calc-formula">(₹1,200 ÷ 1000g) × 250g</div>
+        <div class="pos-calc-price" id="modal-calc-price">₹300.00</div>
+        <div class="pos-calc-sub" id="modal-calc-sub">Calculated for exact 250 grams</div>
+      </div>
+
+      <!-- WEIGHT INPUT FORM (FOR KG PRODUCTS) -->
+      <div id="modal-weight-controls">
+        <div class="pos-chips-label">Quick Weight Presets</div>
+        <div class="pos-gram-chips">
+          <button type="button" class="pos-gram-chip" data-grams="100">100g</button>
+          <button type="button" class="pos-gram-chip active" data-grams="250">250g</button>
+          <button type="button" class="pos-gram-chip" data-grams="350">350g</button>
+          <button type="button" class="pos-gram-chip" data-grams="500">500g (½ kg)</button>
+          <button type="button" class="pos-gram-chip" data-grams="750">750g</button>
+          <button type="button" class="pos-gram-chip" data-grams="1000">1,000g (1 kg)</button>
+          <button type="button" class="pos-gram-chip" data-grams="1500">1.5 kg</button>
+          <button type="button" class="pos-gram-chip" data-grams="2000">2 kg</button>
+        </div>
+
+        <div class="pos-chips-label">Exact Weight on Scale (Grams)</div>
+        <div class="pos-gram-input-wrap">
+          <input type="number" id="modal-input-grams" min="1" max="50000" value="250" step="1" inputmode="numeric">
+          <span class="pos-gram-unit-label">GRAMS (g)</span>
+        </div>
+      </div>
+
+      <!-- PIECE / BOX COUNT CONTROLS (FOR UNIT PRODUCTS) -->
+      <div id="modal-count-controls" style="display:none">
+        <div class="pos-chips-label">Quantity Count</div>
+        <div class="pos-gram-input-wrap" style="justify-content:center">
+          <button type="button" class="btn btn-ghost" id="modal-count-minus" style="min-height:44px;width:44px;padding:0;font-size:22px">-</button>
+          <input type="number" id="modal-input-count" min="1" max="500" value="1" step="1" style="max-width:120px" inputmode="numeric">
+          <button type="button" class="btn btn-ghost" id="modal-count-plus" style="min-height:44px;width:44px;padding:0;font-size:22px">+</button>
+        </div>
+      </div>
+
+      <button type="button" class="pos-modal-add-btn" id="modal-btn-confirm-add">Add to Customer Bill</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRINTABLE 80MM / A4 THERMAL RECEIPT SLIP -->
+<div class="printable-receipt-slip" id="print-receipt-container">
+  <div class="print-receipt-center">
+    <b style="font-size:13pt">OM'S DEHLII DARBAR MITHAIWALA</b><br>
+    <i>Since 1947 · Mithai n More</i><br>
+    Shop No. 20, Shivaji Nagar, Delisle Road,<br>
+    Lower Parel (E), Mumbai — 400 013<br>
+    Tel: 99208 79952 / 98202 60299<br>
+    FSSAI: 21521015000240 · GSTIN: ABZPT1488R1Z4
+  </div>
+  <div class="print-receipt-divider"></div>
+  <div>
+    Invoice: <b id="prn-inv-no">ODD-2026-0001</b><br>
+    Date: <span id="prn-inv-date">--/--/----</span> | Time: <span id="prn-inv-time">--:--</span><br>
+    Customer: <span id="prn-cust-name">Walk-in Patron</span><br>
+    Phone: <span id="prn-cust-phone">--</span>
+  </div>
+  <div class="print-receipt-divider"></div>
+  <table class="print-receipt-table">
+    <thead>
+      <tr>
+        <th style="width:45%">Item</th>
+        <th style="width:25%">Qty/Wt</th>
+        <th style="width:30%;text-align:right">Amount</th>
+      </tr>
+    </thead>
+    <tbody id="prn-table-body">
+      <!-- Injected Rows -->
+    </tbody>
+  </table>
+  <div class="print-receipt-divider"></div>
+  <table style="width:100%">
+    <tr><td>Subtotal:</td><td style="text-align:right" id="prn-subtotal">₹0.00</td></tr>
+    <tr id="prn-box-row" style="display:none"><td>Fancy Box:</td><td style="text-align:right" id="prn-box-charge">₹0.00</td></tr>
+    <tr id="prn-disc-row" style="display:none"><td>Discount:</td><td style="text-align:right" id="prn-disc-amt">-₹0.00</td></tr>
+    <tr><td class="print-receipt-total">TOTAL:</td><td class="print-receipt-total" style="text-align:right" id="prn-grand-total">₹0.00</td></tr>
+  </table>
+  <div class="print-receipt-divider"></div>
+  <div class="print-receipt-center">
+    <b>Freshness Notice:</b><br>
+    Milk &amp; Mawa sweets eat within 12 hours.<br>
+    Bengali sweets keep in fridge (6 hrs).<br>
+    *** THANK YOU FOR VISITING! ***
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Generate Live Clock & Auto Invoice Number
+  var invoiceNum = 'ODD-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+  var invEl = document.getElementById('pos-invoice-num');
+  if (invEl) invEl.textContent = 'INV #' + invoiceNum;
+
+  function updateClock() {
+    var now = new Date();
+    var timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    var clockEl = document.getElementById('pos-live-clock');
+    if (clockEl) clockEl.textContent = timeStr;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  function inr(n) { return '₹' + Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function inrRound(n) { return '₹' + Number(Math.round(n)).toLocaleString('en-IN'); }
+  function esc(s) {
+    return String(s || '').replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // Catalogue Item Source
+  var catalogueItems = [];
+
+  if (typeof PRODUCTS !== 'undefined') {
+    PRODUCTS.forEach(function (p) {
+      catalogueItems.push({
+        id: p.id,
+        name: p.name,
+        nameHi: p.nameHi || '',
+        category: p.category,
+        categories: p.categories || [p.category],
+        rate: p.pricePerKg || 0,
+        unit: p.unit || 'kg',
+        photo: p.photo
+      });
+    });
+  }
+
+  // Add 4 Assortment Bands as catalogue items
+  if (typeof BANDS !== 'undefined') {
+    BANDS.forEach(function (b) {
+      catalogueItems.push({
+        id: 'band-' + b.id,
+        name: b.name,
+        nameHi: b.nameHi || '',
+        category: 'bands',
+        categories: ['bands'],
+        rate: b.pricePerKg,
+        unit: 'kg',
+        photo: 'assorted-diamonds'
+      });
+    });
+  }
+
+  // Add Boxes and Hampers
+  if (typeof BOXES !== 'undefined') {
+    BOXES.forEach(function (bx, i) {
+      catalogueItems.push({
+        id: 'box-' + i,
+        name: bx.name + ' (' + bx.weight + ')',
+        nameHi: 'ड्राई फ्रूट बॉक्स',
+        category: 'boxes',
+        categories: ['boxes'],
+        rate: bx.price,
+        unit: 'box',
+        photo: 'box-white'
+      });
+    });
+  }
+
+  if (typeof HAMPERS !== 'undefined') {
+    HAMPERS.forEach(function (h, i) {
+      catalogueItems.push({
+        id: 'hamper-' + i,
+        name: h.name + ' Gift Hamper (' + h.weight + ')',
+        nameHi: h.nameHi || 'गिफ्ट हैंपर',
+        category: 'boxes',
+        categories: ['boxes'],
+        rate: h.price,
+        unit: 'box',
+        photo: 'assorted-hamper'
+      });
+    });
+  }
+
+  // State
+  var currentCategory = 'all';
+  var searchQuery = '';
+  var cart = []; // array of { id, name, nameHi, rate, unit, grams, count, amount }
+  var selectedItemForModal = null;
+
+  // DOM Elements
+  var itemsContainer = document.getElementById('pos-items-container');
+  var cartTbody = document.getElementById('pos-cart-tbody');
+  var cartEmptyMsg = document.getElementById('pos-cart-empty-msg');
+  var searchInput = document.getElementById('pos-search-input');
+  var catButtons = document.querySelectorAll('.pos-cat-btn');
+
+  // Modal DOM
+  var modalOverlay = document.getElementById('weigh-modal-overlay');
+  var modalCloseBtn = document.getElementById('modal-close-btn');
+  var modalSweetName = document.getElementById('modal-sweet-name');
+  var modalItemImg = document.getElementById('modal-item-img');
+  var modalItemTitle = document.getElementById('modal-item-title');
+  var modalItemDeva = document.getElementById('modal-item-deva');
+  var modalItemRateLabel = document.getElementById('modal-item-rate-label');
+  var modalCalcFormula = document.getElementById('modal-calc-formula');
+  var modalCalcPrice = document.getElementById('modal-calc-price');
+  var modalCalcSub = document.getElementById('modal-calc-sub');
+  var modalWeightControls = document.getElementById('modal-weight-controls');
+  var modalCountControls = document.getElementById('modal-count-controls');
+  var modalInputGrams = document.getElementById('modal-input-grams');
+  var modalInputCount = document.getElementById('modal-input-count');
+  var modalBtnConfirmAdd = document.getElementById('modal-btn-confirm-add');
+  var modalCountMinus = document.getElementById('modal-count-minus');
+  var modalCountPlus = document.getElementById('modal-count-plus');
+
+  // Render POS Catalogue Tiles
+  function renderCatalogue() {
+    if (!itemsContainer) return;
+    
+    var filtered = catalogueItems.filter(function (item) {
+      var matchCat = (currentCategory === 'all') || 
+                     (item.category === currentCategory) || 
+                     (item.categories && item.categories.indexOf(currentCategory) !== -1);
+      
+      var q = searchQuery.toLowerCase();
+      var matchSearch = !q || 
+                        item.name.toLowerCase().indexOf(q) !== -1 || 
+                        (item.nameHi && item.nameHi.toLowerCase().indexOf(q) !== -1);
+      
+      return matchCat && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      itemsContainer.innerHTML = '<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--muted)">No items found matching "' + esc(searchQuery) + '".</div>';
+      return;
+    }
+
+    var html = filtered.map(function (item) {
+      var imgPath = item.photo ? 'assets/img/' + item.photo + '-400.jpg' : 'assets/img/kaju-katri-400.jpg';
+      var rateText = inrRound(item.rate);
+      var unitText = item.unit === 'box' ? 'per box' : (item.unit === 'piece' ? 'per pc' : 'per kg');
+      
+      return '<div class="pos-item-tile" data-id="' + esc(item.id) + '">' +
+        '<div class="pos-tile-add">+</div>' +
+        '<div class="pos-tile-img">' +
+          '<img src="' + imgPath + '" alt="' + esc(item.name) + '" loading="lazy" onerror="this.src=\'assets/img/kaju-katri-400.jpg\'">' +
+        '</div>' +
+        '<div class="pos-tile-title">' + esc(item.name) + '</div>' +
+        (item.nameHi ? '<div class="pos-tile-deva">' + esc(item.nameHi) + '</div>' : '') +
+        '<div class="pos-tile-price">' +
+          '<span class="pos-tile-rate">' + rateText + '</span>' +
+          '<span class="pos-tile-unit">' + unitText + '</span>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    itemsContainer.innerHTML = html;
+
+    // Attach click events
+    itemsContainer.querySelectorAll('.pos-item-tile').forEach(function (tile) {
+      tile.addEventListener('click', function () {
+        var id = this.getAttribute('data-id');
+        var item = catalogueItems.find(function (it) { return it.id === id; });
+        if (item) openWeighModal(item);
+      });
+    });
+  }
+
+  // Open Weighing Modal
+  function openWeighModal(item) {
+    selectedItemForModal = item;
+    modalSweetName.textContent = item.unit === 'kg' ? 'Weigh & Calculate Grams' : 'Select Quantity';
+    modalItemTitle.textContent = item.name;
+    modalItemDeva.textContent = item.nameHi || '';
+    modalItemImg.src = item.photo ? 'assets/img/' + item.photo + '-400.jpg' : 'assets/img/kaju-katri-400.jpg';
+    
+    var unitLabel = item.unit === 'box' ? 'per box' : (item.unit === 'piece' ? 'per piece' : 'per kg');
+    modalItemRateLabel.textContent = 'Official Rate: ' + inrRound(item.rate) + ' ' + unitLabel;
+
+    if (item.unit === 'kg') {
+      modalWeightControls.style.display = 'block';
+      modalCountControls.style.display = 'none';
+      modalInputGrams.value = '250';
+      
+      // reset chip active state to 250g
+      document.querySelectorAll('.pos-gram-chip').forEach(function (chip) {
+        if (chip.getAttribute('data-grams') === '250') chip.classList.add('active');
+        else chip.classList.remove('active');
+      });
+      recalcModalGramPrice(250);
+    } else {
+      modalWeightControls.style.display = 'none';
+      modalCountControls.style.display = 'block';
+      modalInputCount.value = '1';
+      recalcModalCountPrice(1);
+    }
+
+    modalOverlay.classList.add('active');
+    if (item.unit === 'kg') modalInputGrams.focus();
+    else modalInputCount.focus();
+  }
+
+  function closeWeighModal() {
+    modalOverlay.classList.remove('active');
+    selectedItemForModal = null;
+  }
+
+  modalCloseBtn.addEventListener('click', closeWeighModal);
+  modalOverlay.addEventListener('click', function (e) {
+    if (e.target === modalOverlay) closeWeighModal();
+  });
+
+  // Calculate Exact Gram Price
+  function recalcModalGramPrice(grams) {
+    if (!selectedItemForModal || selectedItemForModal.unit !== 'kg') return;
+    grams = Math.max(1, Number(grams) || 1);
+    
+    // Formula: (Rate / 1000) * grams
+    var rate = Number(selectedItemForModal.rate) || 0;
+    var pricePerGram = rate / 1000.0;
+    var total = pricePerGram * grams;
+
+    modalCalcFormula.textContent = '(' + inrRound(rate) + ' ÷ 1000g) × ' + grams + 'g';
+    modalCalcPrice.textContent = inr(total);
+    modalCalcSub.textContent = 'Calculated for exact ' + grams + ' grams (' + (grams >= 1000 ? (grams/1000).toFixed(3) + ' kg' : grams + ' g') + ')';
+  }
+
+  // Calculate Unit Count Price
+  function recalcModalCountPrice(count) {
+    if (!selectedItemForModal || selectedItemForModal.unit === 'kg') return;
+    count = Math.max(1, parseInt(count, 10) || 1);
+    var rate = Number(selectedItemForModal.rate) || 0;
+    var total = rate * count;
+    var unitWord = selectedItemForModal.unit === 'box' ? (count > 1 ? 'boxes' : 'box') : (count > 1 ? 'pieces' : 'piece');
+
+    modalCalcFormula.textContent = inrRound(rate) + ' × ' + count + ' ' + unitWord;
+    modalCalcPrice.textContent = inr(total);
+    modalCalcSub.textContent = 'Calculated for ' + count + ' ' + unitWord;
+  }
+
+  // Quick Gram Preset Chips
+  document.querySelectorAll('.pos-gram-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      document.querySelectorAll('.pos-gram-chip').forEach(function (c) { c.classList.remove('active'); });
+      this.classList.add('active');
+      var g = parseInt(this.getAttribute('data-grams'), 10);
+      modalInputGrams.value = g;
+      recalcModalGramPrice(g);
+    });
+  });
+
+  modalInputGrams.addEventListener('input', function () {
+    var g = parseInt(this.value, 10) || 0;
+    document.querySelectorAll('.pos-gram-chip').forEach(function (c) {
+      if (parseInt(c.getAttribute('data-grams'), 10) === g) c.classList.add('active');
+      else c.classList.remove('active');
+    });
+    recalcModalGramPrice(g);
+  });
+
+  modalInputCount.addEventListener('input', function () {
+    var c = parseInt(this.value, 10) || 1;
+    recalcModalCountPrice(c);
+  });
+
+  modalCountMinus.addEventListener('click', function () {
+    var c = Math.max(1, (parseInt(modalInputCount.value, 10) || 1) - 1);
+    modalInputCount.value = c;
+    recalcModalCountPrice(c);
+  });
+
+  modalCountPlus.addEventListener('click', function () {
+    var c = (parseInt(modalInputCount.value, 10) || 1) + 1;
+    modalInputCount.value = c;
+    recalcModalCountPrice(c);
+  });
+
+  // Confirm and Add to Bill
+  modalBtnConfirmAdd.addEventListener('click', function () {
+    if (!selectedItemForModal) return;
+    
+    var item = selectedItemForModal;
+    var lineAmount = 0;
+    var grams = 0;
+    var count = 1;
+
+    if (item.unit === 'kg') {
+      grams = Math.max(1, parseInt(modalInputGrams.value, 10) || 250);
+      lineAmount = (Number(item.rate) / 1000.0) * grams;
+    } else {
+      count = Math.max(1, parseInt(modalInputCount.value, 10) || 1);
+      lineAmount = Number(item.rate) * count;
+    }
+
+    cart.push({
+      id: item.id + '-' + Date.now(),
+      name: item.name,
+      nameHi: item.nameHi,
+      rate: item.rate,
+      unit: item.unit,
+      grams: grams,
+      count: count,
+      amount: lineAmount
+    });
+
+    closeWeighModal();
+    renderCart();
+  });
+
+  // Custom Item Modal Prompt
+  document.getElementById('pos-btn-custom-item').addEventListener('click', function () {
+    var name = prompt('Enter Custom Item Name:', 'Special Mithai / Farsan');
+    if (!name) return;
+    var rate = parseFloat(prompt('Enter Rate per Kg (or per piece) in ₹:', '600')) || 600;
+    var unit = confirm('Is this item sold by weight in Kg? (Click Cancel for Piece/Box)') ? 'kg' : 'piece';
+
+    var customItem = {
+      id: 'custom-' + Date.now(),
+      name: name,
+      nameHi: '',
+      category: 'custom',
+      categories: ['custom'],
+      rate: rate,
+      unit: unit,
+      photo: null
+    };
+
+    openWeighModal(customItem);
+  });
+
+  // Render Cart & Invoices
+  function renderCart() {
+    if (cart.length === 0) {
+      cartTbody.innerHTML = '';
+      cartEmptyMsg.style.display = 'block';
+    } else {
+      cartEmptyMsg.style.display = 'none';
+      var html = cart.map(function (row, idx) {
+        var qtyDisplay = '';
+        var calcNote = '';
+        if (row.unit === 'kg') {
+          qtyDisplay = '<b>' + (row.grams >= 1000 ? (row.grams/1000).toFixed(3) + ' kg' : row.grams + ' g') + '</b>';
+          calcNote = inrRound(row.rate) + '/kg × ' + row.grams + 'g';
+        } else {
+          var uLabel = row.unit === 'box' ? (row.count > 1 ? 'boxes' : 'box') : (row.count > 1 ? 'pcs' : 'pc');
+          qtyDisplay = '<b>' + row.count + ' ' + uLabel + '</b>';
+          calcNote = inrRound(row.rate) + '/' + row.unit + ' × ' + row.count;
+        }
+
+        return '<tr>' +
+          '<td>' +
+            '<div class="pos-cart-name">' + esc(row.name) + '</div>' +
+            '<div class="pos-cart-calc">' + esc(calcNote) + '</div>' +
+          '</td>' +
+          '<td style="text-align:center">' + qtyDisplay + '</td>' +
+          '<td class="pos-cart-amt">' + inr(row.amount) + '</td>' +
+          '<td><button class="pos-cart-del" type="button" data-idx="' + idx + '" title="Remove item">&times;</button></td>' +
+        '</tr>';
+      }).join('');
+      cartTbody.innerHTML = html;
+
+      // Attach delete row handlers
+      cartTbody.querySelectorAll('.pos-cart-del').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var idx = parseInt(this.getAttribute('data-idx'), 10);
+          cart.splice(idx, 1);
+          renderCart();
+        });
+      });
+    }
+
+    // Calculations
+    var totalGrams = 0;
+    var subtotal = 0;
+    cart.forEach(function (row) {
+      subtotal += row.amount;
+      if (row.unit === 'kg') totalGrams += row.grams;
+    });
+
+    var fancyBoxCheck = document.getElementById('pos-toggle-fancy-box');
+    var boxCharge = (fancyBoxCheck && fancyBoxCheck.checked && cart.length > 0) ? 50.0 : 0.0;
+    var discountInput = document.getElementById('pos-discount-pct');
+    var discPct = Math.min(50, Math.max(0, parseFloat(discountInput ? discountInput.value : 0) || 0));
+    var discAmount = (subtotal * discPct) / 100.0;
+    var grandTotal = Math.max(0, subtotal + boxCharge - discAmount);
+
+    document.getElementById('pos-sum-items-count').textContent = cart.length + ' items' + (totalGrams > 0 ? ' (' + (totalGrams >= 1000 ? (totalGrams/1000).toFixed(3) + ' kg' : totalGrams + ' g') + ')' : '');
+    document.getElementById('pos-sum-subtotal').textContent = inr(subtotal);
+    document.getElementById('pos-sum-box-charge').textContent = boxCharge > 0 ? '+' + inr(boxCharge) : '₹0.00';
+    document.getElementById('pos-sum-discount').textContent = discAmount > 0 ? '-' + inr(discAmount) : '-₹0.00';
+    document.getElementById('pos-sum-grand-total').textContent = inr(grandTotal);
+
+    // Update Print Slip Elements
+    updatePrintableSlip(subtotal, boxCharge, discAmount, grandTotal);
+  }
+
+  function updatePrintableSlip(subtotal, boxCharge, discAmount, grandTotal) {
+    var now = new Date();
+    document.getElementById('prn-inv-no').textContent = invoiceNum;
+    document.getElementById('prn-inv-date').textContent = now.toLocaleDateString('en-IN');
+    document.getElementById('prn-inv-time').textContent = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    
+    var custName = (document.getElementById('cust-name').value || '').trim() || 'Valued Patron';
+    var custPhone = (document.getElementById('cust-phone').value || '').trim() || 'Counter Sale';
+    document.getElementById('prn-cust-name').textContent = custName;
+    document.getElementById('prn-cust-phone').textContent = custPhone;
+
+    var prnTbody = document.getElementById('prn-table-body');
+    if (cart.length === 0) {
+      prnTbody.innerHTML = '<tr><td colspan="3" style="text-align:center">No items</td></tr>';
+    } else {
+      prnTbody.innerHTML = cart.map(function (row) {
+        var wtStr = row.unit === 'kg' ? (row.grams >= 1000 ? (row.grams/1000).toFixed(3) + 'kg' : row.grams + 'g') : row.count + ' ' + row.unit;
+        return '<tr>' +
+          '<td>' + esc(row.name) + '</td>' +
+          '<td>' + wtStr + '</td>' +
+          '<td style="text-align:right">' + inr(row.amount) + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    document.getElementById('prn-subtotal').textContent = inr(subtotal);
+    var boxRow = document.getElementById('prn-box-row');
+    if (boxCharge > 0) {
+      boxRow.style.display = '';
+      document.getElementById('prn-box-charge').textContent = inr(boxCharge);
+    } else {
+      boxRow.style.display = 'none';
+    }
+
+    var discRow = document.getElementById('prn-disc-row');
+    if (discAmount > 0) {
+      discRow.style.display = '';
+      document.getElementById('prn-disc-amt').textContent = '-' + inr(discAmount);
+    } else {
+      discRow.style.display = 'none';
+    }
+
+    document.getElementById('prn-grand-total').textContent = inr(grandTotal);
+  }
+
+  // Event Listeners for Recalculation
+  document.getElementById('pos-toggle-fancy-box').addEventListener('change', renderCart);
+  document.getElementById('pos-discount-pct').addEventListener('input', renderCart);
+  document.getElementById('cust-name').addEventListener('input', renderCart);
+  document.getElementById('cust-phone').addEventListener('input', renderCart);
+
+  // Clear Cart / Reset Bill
+  document.getElementById('btn-clear-cart').addEventListener('click', function () {
+    if (cart.length > 0 && !confirm('Are you sure you want to clear this bill and start a new one?')) return;
+    cart = [];
+    document.getElementById('cust-name').value = '';
+    document.getElementById('cust-phone').value = '';
+    document.getElementById('pos-discount-pct').value = '0';
+    document.getElementById('pos-toggle-fancy-box').checked = false;
+    invoiceNum = 'ODD-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+    document.getElementById('pos-invoice-num').textContent = 'INV #' + invoiceNum;
+    renderCart();
+  });
+
+  // Search & Filter Listeners
+  searchInput.addEventListener('input', function (e) {
+    searchQuery = (e.target.value || '').trim();
+    renderCatalogue();
+  });
+
+  catButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      catButtons.forEach(function (b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      currentCategory = this.getAttribute('data-cat');
+      renderCatalogue();
+    });
+  });
+
+  // DIRECT PHONE DISPATCH: WHATSAPP
+  document.getElementById('btn-send-whatsapp').addEventListener('click', function () {
+    if (cart.length === 0) {
+      alert('Please add at least one sweet item to the bill before dispatching.');
+      return;
+    }
+
+    var phoneInput = document.getElementById('cust-phone').value.replace(/[^0-9]/g, '');
+    var custName = (document.getElementById('cust-name').value || '').trim() || 'Patron';
+
+    if (!phoneInput || phoneInput.length < 10) {
+      phoneInput = prompt('Please enter customer’s 10-digit mobile number to send WhatsApp bill:', '');
+      if (!phoneInput) return;
+      phoneInput = phoneInput.replace(/[^0-9]/g, '');
+      if (phoneInput.length < 10) {
+        alert('Valid 10-digit mobile number required.');
+        return;
+      }
+      document.getElementById('cust-phone').value = phoneInput.slice(-10);
+    }
+
+    var finalPhone = phoneInput.length === 10 ? '91' + phoneInput : phoneInput;
+
+    // Calculate totals
+    var subtotal = 0;
+    var totalGrams = 0;
+    var itemLines = cart.map(function (row, idx) {
+      subtotal += row.amount;
+      var wtStr = row.unit === 'kg' ? (row.grams >= 1000 ? (row.grams/1000).toFixed(3) + ' kg' : row.grams + ' g') : row.count + ' ' + row.unit;
+      if (row.unit === 'kg') totalGrams += row.grams;
+      return (idx + 1) + '. *' + row.name + '*\n   ' + inrRound(row.rate) + '/' + row.unit + ' × ' + wtStr + ' = *' + inr(row.amount) + '*';
+    }).join('\n');
+
+    var boxCharge = document.getElementById('pos-toggle-fancy-box').checked ? 50.0 : 0.0;
+    var discPct = parseFloat(document.getElementById('pos-discount-pct').value) || 0;
+    var discAmount = (subtotal * discPct) / 100.0;
+    var grandTotal = Math.max(0, subtotal + boxCharge - discAmount);
+
+    var now = new Date();
+    var dateStr = now.toLocaleDateString('en-IN');
+    var timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+    var msg = '👑 *OM\'S DEHLII DARBAR MITHAIWALA (Since 1947)*\n' +
+              '📍 *Shop No. 20, Delisle Road, Lower Parel, Mumbai*\n' +
+              '-----------------------------------------\n' +
+              '🧾 *TAX INVOICE / CASH BILL*\n' +
+              '🔢 *Bill No:* ' + invoiceNum + '\n' +
+              '📅 *Date:* ' + dateStr + ' ' + timeStr + '\n' +
+              '👤 *Customer:* ' + custName + '\n' +
+              '-----------------------------------------\n' +
+              itemLines + '\n' +
+              '-----------------------------------------\n' +
+              '💰 *Subtotal:* ' + inr(subtotal) + '\n';
+
+    if (boxCharge > 0) msg += '🎁 *Fancy Gift Box:* ' + inr(boxCharge) + '\n';
+    if (discAmount > 0) msg += '🏷️ *Discount (' + discPct + '%):* -' + inr(discAmount) + '\n';
+
+    msg += '⭐ *GRAND TOTAL: ' + inr(grandTotal) + '*\n' +
+           '-----------------------------------------\n' +
+           '✨ *Freshness Rule:* Milk & Mawa sweets consume within 12 hours. Bengali sweets keep in fridge.\n' +
+           '🙏 *Thank you for shopping with us! Have a sweet day!*';
+
+    var waUrl = 'https://wa.me/' + finalPhone + '?text=' + encodeURIComponent(msg);
+    window.open(waUrl, '_blank');
+  });
+
+  // DIRECT PHONE DISPATCH: SMS
+  document.getElementById('btn-send-sms').addEventListener('click', function () {
+    if (cart.length === 0) {
+      alert('Please add at least one sweet item to the bill before dispatching.');
+      return;
+    }
+
+    var phoneInput = document.getElementById('cust-phone').value.replace(/[^0-9]/g, '');
+    var custName = (document.getElementById('cust-name').value || '').trim() || 'Patron';
+
+    var subtotal = 0;
+    cart.forEach(function (r) { subtotal += r.amount; });
+    var boxCharge = document.getElementById('pos-toggle-fancy-box').checked ? 50.0 : 0.0;
+    var discPct = parseFloat(document.getElementById('pos-discount-pct').value) || 0;
+    var discAmount = (subtotal * discPct) / 100.0;
+    var grandTotal = Math.max(0, subtotal + boxCharge - discAmount);
+
+    var smsText = "Om's Dehlii Darbar Bill " + invoiceNum + " for " + custName + ": Total " + inr(grandTotal) + " (" + cart.length + " items). Thank you!";
+    var smsUrl = 'sms:' + (phoneInput ? '+91' + phoneInput.slice(-10) : '') + '?body=' + encodeURIComponent(smsText);
+    window.location.href = smsUrl;
+  });
+
+  // Initial Load
+  renderCatalogue();
+  renderCart();
+});
+</script>
+</body>
+</html>

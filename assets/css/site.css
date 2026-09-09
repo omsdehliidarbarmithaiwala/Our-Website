@@ -1062,3 +1062,134 @@ stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 
   .menu-search-box{flex:1 1 100%}
 }
 
+/* ==========================================================================
+   POS BILLING SYSTEM & GRAM-ACCURATE CALCULATOR STYLES
+   ========================================================================== */
+.pos-wrapper{padding:24px 0 60px}
+.pos-grid-layout{display:grid;grid-template-columns:1fr 440px;gap:24px;align-items:start}
+
+/* Left: Counter Catalogue */
+.pos-catalog-panel{background:#FFF;border:1px solid rgba(184,137,43,.35);border-radius:16px;padding:20px;box-shadow:0 4px 20px rgba(58,35,24,.06)}
+.pos-catalog-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.pos-search{flex:1;min-width:240px;position:relative}
+.pos-search input{width:100%;padding:10px 16px 10px 40px;border-radius:999px;border:1.5px solid rgba(184,137,43,.4);font-family:'Bitter',serif;font-size:15px;background:#FFFDF8;color:var(--ink)}
+.pos-search input:focus{outline:2px solid var(--crimson);border-color:var(--crimson)}
+.pos-search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.pos-cat-filter{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;margin-bottom:16px}
+.pos-cat-filter::-webkit-scrollbar{display:none}
+.pos-cat-btn{padding:7px 14px;border-radius:999px;border:1px solid rgba(184,137,43,.35);background:#FFFDF8;color:var(--maroon);font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:.03em;cursor:pointer;white-space:nowrap;transition:all .15s ease}
+.pos-cat-btn.active,.pos-cat-btn:hover{background:var(--maroon);color:#FFF;border-color:var(--maroon)}
+
+.pos-items-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));gap:14px;max-height:750px;overflow-y:auto;padding-right:4px}
+.pos-item-tile{background:#FFFDF8;border:1.5px solid rgba(184,137,43,.3);border-radius:12px;padding:12px;display:flex;flex-direction:column;cursor:pointer;transition:all .2s ease;text-align:left;position:relative}
+.pos-item-tile:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 16px rgba(58,35,24,.1)}
+.pos-item-tile:active{transform:scale(.98)}
+.pos-tile-img{width:100%;aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:var(--cream-2);margin-bottom:8px;border:1px solid rgba(184,137,43,.25)}
+.pos-tile-img img{width:100%;height:100%;object-fit:cover}
+.pos-tile-title{font-size:15px;font-weight:800;color:var(--maroon);line-height:1.2;font-family:'Bitter',serif}
+.pos-tile-deva{font-family:'Mukta',sans-serif;font-size:12.5px;color:var(--crimson);font-weight:600}
+.pos-tile-price{margin-top:auto;padding-top:8px;display:flex;align-items:baseline;justify-content:space-between}
+.pos-tile-rate{font-family:'Bitter',serif;font-weight:800;font-size:16px;color:var(--crimson)}
+.pos-tile-unit{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase}
+.pos-tile-add{position:absolute;top:8px;right:8px;background:var(--crimson);color:#FFF;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+
+/* Right: POS Billing Invoice Panel */
+.pos-bill-panel{background:#FFF;border:2px solid var(--gold);border-radius:16px;box-shadow:0 8px 30px rgba(58,35,24,.1);overflow:hidden;position:sticky;top:20px}
+.pos-bill-header{background:linear-gradient(135deg, var(--maroon) 0%, var(--crimson) 100%);color:#FFF;padding:18px 20px;display:flex;align-items:center;justify-content:space-between}
+.pos-bill-header h3{font-size:20px;color:#FFF;margin:0}
+.pos-bill-inv-no{font-family:'Oswald',sans-serif;font-size:13px;color:#F0C86A;letter-spacing:.08em;font-weight:700}
+.pos-customer-box{padding:14px 18px;background:var(--cream-2);border-bottom:1px solid rgba(184,137,43,.3);display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pos-cust-field{display:flex;flex-direction:column;gap:3px}
+.pos-cust-field label{font-size:11.5px;font-family:'Oswald',sans-serif;font-weight:700;color:var(--maroon);text-transform:uppercase;letter-spacing:.04em}
+.pos-cust-field input{padding:7px 10px;border-radius:6px;border:1px solid rgba(184,137,43,.5);font-family:'Bitter',serif;font-size:13.5px;background:#FFF}
+.pos-cust-field input:focus{outline:2px solid var(--crimson);border-color:var(--crimson)}
+
+/* Cart Items Table in Billing Panel */
+.pos-cart-table-wrap{max-height:340px;overflow-y:auto;padding:0 18px}
+.pos-cart-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.pos-cart-table th{padding:10px 4px;border-bottom:1.5px solid #C9962C;color:var(--maroon);font-family:'Oswald',sans-serif;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;text-align:left}
+.pos-cart-table td{padding:10px 4px;border-bottom:1px dashed rgba(184,137,43,.25);vertical-align:middle}
+.pos-cart-name{font-weight:700;color:var(--ink);font-size:13.5px}
+.pos-cart-calc{font-size:11.5px;color:var(--muted)}
+.pos-cart-amt{font-family:'Bitter',serif;font-weight:800;font-size:15px;color:var(--crimson);text-align:right;white-space:nowrap}
+.pos-cart-del{background:none;border:0;color:#C4123F;cursor:pointer;font-size:16px;padding:2px 6px;line-height:1;border-radius:4px}
+.pos-cart-del:hover{background:rgba(196,18,63,.1)}
+.pos-cart-empty{padding:40px 10px;text-align:center;color:var(--muted);font-style:italic;font-size:14px}
+
+/* Calculation Summary */
+.pos-bill-summary{padding:14px 18px;background:var(--cream);border-top:1.5px solid var(--gold)}
+.pos-sum-row{display:flex;align-items:center;justify-content:space-between;font-size:13.5px;color:var(--ink);margin-bottom:6px}
+.pos-sum-row.grand{font-size:20px;font-weight:800;color:var(--maroon);border-top:1.5px solid rgba(184,137,43,.4);padding-top:8px;margin-top:6px;margin-bottom:0}
+.pos-sum-row.grand .amt{color:var(--crimson);font-family:'Bitter',serif}
+
+/* Bill Action Dispatch Buttons */
+.pos-bill-actions{padding:16px 18px 20px;background:#FFF;border-top:1px solid rgba(184,137,43,.3);display:flex;flex-direction:column;gap:10px}
+.btn-dispatch-wa{background:#128C4B;color:#FFF;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:999px;font-family:'Bitter',serif;font-size:15px;font-weight:700;text-decoration:none;border:0;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(18,140,75,.25)}
+.btn-dispatch-wa:hover{background:#0E7540;color:#FFF;transform:translateY(-1px)}
+.btn-dispatch-wa svg{width:20px;height:20px}
+.pos-sub-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn-dispatch-sms{background:#007AFF;color:#FFF;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border-radius:8px;font-family:'Bitter',serif;font-size:13px;font-weight:700;text-decoration:none;border:0;cursor:pointer}
+.btn-dispatch-sms:hover{background:#0062CC;color:#FFF}
+.btn-print-bill{background:#FFF;color:var(--maroon);border:1.5px solid var(--maroon);display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border-radius:8px;font-family:'Bitter',serif;font-size:13px;font-weight:700;cursor:pointer}
+.btn-print-bill:hover{background:var(--cream);color:var(--crimson)}
+.btn-reset-bill{background:transparent;border:0;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer;margin-top:4px;text-align:center}
+
+/* WEIGHING & QUANTITY MODAL */
+.pos-modal-overlay{position:fixed;inset:0;background:rgba(40,10,18,.6);backdrop-filter:blur(4px);z-index:999;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;visibility:hidden;transition:all .25s ease}
+.pos-modal-overlay.active{opacity:1;visibility:visible}
+.pos-modal{background:#FFFDF8;border:3px solid var(--gold);border-radius:20px;max-width:480px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.3);overflow:hidden;transform:translateY(20px);transition:transform .25s ease}
+.pos-modal-overlay.active .pos-modal{transform:translateY(0)}
+.pos-modal-header{background:linear-gradient(135deg, var(--maroon) 0%, var(--crimson) 100%);color:#FFF;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+.pos-modal-header h3{font-size:20px;color:#FFF;margin:0}
+.pos-modal-close{background:none;border:0;color:#FFF;font-size:26px;cursor:pointer;line-height:1}
+.pos-modal-body{padding:24px}
+.pos-modal-item-summary{display:flex;align-items:center;gap:14px;background:var(--cream);padding:12px 16px;border-radius:12px;margin-bottom:20px;border:1px solid rgba(184,137,43,.3)}
+.pos-modal-thumb{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--gold)}
+.pos-modal-calc-box{background:#FFF;border:2px solid var(--crimson);border-radius:14px;padding:16px;text-align:center;margin-bottom:20px;box-shadow:0 4px 12px rgba(196,18,63,.08)}
+.pos-calc-formula{font-size:13px;color:var(--muted);margin-bottom:4px}
+.pos-calc-price{font-family:'Bitter',serif;font-size:36px;font-weight:800;color:var(--crimson);line-height:1}
+.pos-calc-sub{font-size:13px;color:var(--maroon);font-weight:600;margin-top:4px}
+
+/* Gram Quick Chips */
+.pos-chips-label{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:var(--maroon);text-transform:uppercase;margin-bottom:8px}
+.pos-gram-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.pos-gram-chip{padding:8px 14px;border-radius:8px;background:var(--cream-2);border:1px solid rgba(184,137,43,.4);color:var(--ink);font-family:'Bitter',serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.pos-gram-chip.active,.pos-gram-chip:hover{background:var(--crimson);color:#FFF;border-color:var(--crimson)}
+.pos-gram-input-wrap{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.pos-gram-input-wrap input{flex:1;padding:12px 16px;border-radius:10px;border:2px solid rgba(184,137,43,.5);font-family:'Bitter',serif;font-size:22px;font-weight:800;color:var(--ink);text-align:center}
+.pos-gram-input-wrap input:focus{outline:2px solid var(--crimson);border-color:var(--crimson)}
+.pos-gram-unit-label{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:var(--maroon)}
+.pos-modal-add-btn{width:100%;padding:14px;border-radius:999px;background:var(--crimson);color:#FFF;border:0;font-family:'Bitter',serif;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(196,18,63,.3);transition:background .2s}
+.pos-modal-add-btn:hover{background:var(--crimson-d)}
+
+/* PRINTABLE RECEIPT TEMPLATE */
+.printable-receipt-slip{display:none}
+
+@media print {
+  body *{visibility:hidden}
+  .printable-receipt-slip, .printable-receipt-slip *{visibility:visible}
+  .printable-receipt-slip{
+    display:block!important;
+    position:absolute;
+    left:0;top:0;width:80mm;
+    background:#FFF!important;
+    color:#000!important;
+    padding:6mm 4mm;
+    font-family:'Courier New',Courier,monospace;
+    font-size:11pt;
+    line-height:1.3;
+  }
+  .print-receipt-center{text-align:center}
+  .print-receipt-divider{border-top:1pt dashed #000;margin:4mm 0}
+  .print-receipt-table{width:100%;border-collapse:collapse;font-size:10pt}
+  .print-receipt-table th{border-bottom:1pt dashed #000;padding:2mm 0;text-align:left}
+  .print-receipt-table td{padding:2mm 0;vertical-align:top}
+  .print-receipt-total{font-size:13pt;font-weight:bold;margin-top:2mm}
+}
+
+@media (max-width: 992px) {
+  .pos-grid-layout{grid-template-columns:1fr}
+  .pos-bill-panel{position:static;margin-top:20px}
+}
+
+
